@@ -1,43 +1,41 @@
-<?
-
-
-?>
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="myApp">
+
   <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>Dropbox Clone</title>
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+          <title>File Storage</title>
+          <!-- Bootstrap -->
+          <link href="css/bootstrap.min.css" rel="stylesheet">
+            <link href="css/custom.css" rel="stylesheet">
+              <link href="css/toaster.css" rel="stylesheet">
+                <style>
+                  a {
+                  color: orange;
+                  }
+                </style>
+                
+              </head>
 
-    <!-- Bootstrap -->
-    <link href="css/bootstrap.css" rel="stylesheet">
+  <body ng-cloak="">
+    
+    <div>
+      <div class="container" style="margin-top:20px;">
 
-  </head>
-  <body>
+        <div data-ng-view="" id="ng-view" class="slide-animation"></div>
 
-	  <form class="form col-md-6 col-md-offset-3">
-	  	<h1>File Storage Clone</h1><br/>
-	  	<h2>Login</h2>
+      </div>
+    </body>
+  <toaster-container toaster-options="{'time-out': 3000}"></toaster-container>
+  <!-- Libs -->
+  <script src="js/angular.min.js"></script>
+  <script src="js/angular-route.min.js"></script>
+  <script src="js/angular-animate.min.js" ></script>
+  <script src="js/toaster.js"></script>
+  <script src="app/app.js"></script>
+  <script src="app/data.js"></script>
+  <script src="app/directives.js"></script>
+  <script src="app/authCtrl.js"></script>
+</html>
 
-            <div class="form-group">
-              <input type="text" class="form-control input-lg" placeholder="Username:">
-            </div>
-            <div class="form-group">
-              <input type="password" class="form-control input-lg" placeholder="Password:">
-            </div>
-            <div class="form-group">
-              <button class="btn btn-primary btn-lg btn-block">Sign In</button>
-              <span class="pull-right"><a href="api/register.php">Register</a></span>
-            </div>
-        </form>
-
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <script src="js/bootstrap"></script>
-
-  </body>
-
-  </html>
