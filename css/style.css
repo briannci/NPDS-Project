@@ -1,23 +1,32 @@
 html, body{
 	background-color:#dbdbdb;
 }
-
-#upload-file, #uploads{
-	background-color: white;
-	height: auto;
-	padding:1em;
-	margin-top:1em;
+	
+#toast-container{
+	margin-bottom:2em;
 }
 
 #uploads{
-	height:25em;
-}
-
-#left-nav{
-	background-color: #5BC0DE;
+	background-color: white;
 	height: auto;
 	padding:1em;
+}
+
+#upload-file{
+	background-color: white;
+	padding:1em;
+}
+
+#uploads{
+	height:auto;
 	margin-top:1em;
+}
+
+#dash{
+	background-color: white;
+	padding:1em;
+	margin-bottom:1em;
+	margin-top:0;
 }
 
 a{

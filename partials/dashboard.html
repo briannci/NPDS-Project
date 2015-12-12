@@ -1,36 +1,84 @@
-<div class="breadcrumbs" id="breadcrumbs">
-    <ul class="breadcrumb">
-        <li>
-            <i class="ace-icon fa fa-home home-icon"></i>
-            <a href="#">Home</a>
-        </li>
-        <li class="active">Dashboard</li>
-		<h4>Name: {{name}} 
-			Email: {{email}}
-			<a ng-click="logout();">Logout</a></h4>
-		
-    </ul>
-</div>
+	<link href="css/style.css" rel="stylesheet">
+	<div class="col-sm-12" id="dash">
+	<h4>
+			{{name}} &nbsp; &nbsp;
+	    {{email}}&nbsp; &nbsp;
+		<a style="float: right;" ng-click="logout();">Logout</a></h4>
+	</div>
 
-<div class="page-content">
-    <div class="row">
-        <div class="space-6"></div>
-        <div class="col-sm-10 col-sm-offset-1">
-            <div id="login-box" class="login-box visible widget-box no-border">
-                <div class="widget-body">
-                    <div class="widget-main">
-                        <h4 class="header blue lighter bigger">
-                    <i class="icon-coffee green"></i>
-                    
-                </h4>
-                        <div class="space-16"></div>
-                        
-                        <br/>
-                        
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+
 <!-- /.page-content -->
+
+    <div class="col-sm-12" id="upload-file">
+        <div class="col-sm-6 col-sm-offset-2">
+          <form id="uploadimage" action="" method="post" enctype="multipart/form-data">
+          <h2>Upload a file</h2>
+        <span class="btn btn-info btn-lg btn-file">
+        Browse <input type="file" name="fileToUpload" id="fileToUpload">
+                
+        </span><br/><br/>
+        <input type="hidden" name="uemail" id="uemail" value={{email}}>
+        <input type="submit" value="Upload File" class="submit btn btn-info btn-lg btn-file">
+      </form>
+      <div id="result"></div>
+      </div>
+    </div>
+  </div>
+
+     <div class="col-sm-12 " id="uploads">
+		<div class="col-sm-6 col-sm-offset-2">
+		</div>
+     </div> 
+
+  
+ <script>
+  $(document).ready(function (e) {
+  $("#uploadimage").on('submit',(function(e) { //send a POST with the upload file for the sever processing
+    e.preventDefault();
+    $.ajax({
+      url: 'imageScript.php', // Url to which the request is send
+      type: 'POST',             // Type of request to be send, called as method
+      data: new FormData(this), // Data sent to server, a set of key/value pairs (i.e. form fields and values)
+      contentType: false,       // The content type used when sending data to the server.
+      cache: false,             // To unable request pages to be cached
+      processData:false,        // To send DOMDocument or non processed data file it is set to false
+      success: function (d) {
+        $('#result').html(d);
+        showFiles();
+                }   // A function to be called if request succeeds
+            });
+      }));
+  $(document).ready(function(e) {
+    setTimeout(function() {
+      showFiles();
+      }, 100)});
+  });
+
+  $("body").on('click','.delete',(function(e) { //sends the file information for deletion
+    e.preventDefault();
+    $.ajax({
+      url: 'imageScript.php', // Url to which the request is send
+      type: 'POST',             // Type of request to be send, called as method
+      data: {action: 'delete', filepath: $(this).siblings('.hidden').val() }, // Data sent to server, a set of key/value pairs (i.e. form fields and values)
+      success: function (d) {
+        $('#result').html(d);
+          showFiles();
+                }   // A function to be called if request succeeds
+            });
+      }));
+
+  function showFiles(){ // QUeries the server for the users files
+    $.ajax({
+          url: 'imageScript.php', // Url to which the request is send
+          type: 'POST',             // Type of request to be send, called as method
+          data: {action: 'gallery', uemail: $("#uemail").val()}, // Data sent to server, a set of key/value pairs (i.e. form fields and values)
+          success: function (d) {
+            $('#uploads').html(d);
+                }   // A function to be called if request succeeds
+              });
+
+                }   // A function to be called if request succeeds
+
+  </script>
+  
+

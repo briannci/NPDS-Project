@@ -6,10 +6,9 @@
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width,initial-scale=1">
           <title>File Storage</title>
-          <!-- Testing Git in PHPStorm-->
           <!-- Bootstrap -->
           <link href="css/bootstrap.min.css" rel="stylesheet">
-            <link href="css/custom.css" rel="stylesheet">
+          <link href="css/custom.css" rel="stylesheet">
               <link href="css/toaster.css" rel="stylesheet">
                 <style>
                   a {
@@ -30,6 +29,9 @@
     </body>
   <toaster-container toaster-options="{'time-out': 3000}"></toaster-container>
   <!-- Libs -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="js/bootstrap"></script>
+    
   <script src="js/angular.min.js"></script>
   <script src="js/angular-route.min.js"></script>
   <script src="js/angular-animate.min.js" ></script>

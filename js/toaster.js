@@ -31,15 +31,9 @@ angular.module('toaster', ['ngAnimate'])
     };
 }])
 .constant('toasterConfig', {
-    'limit': 0,                   // limits max number of toasts 
+    'limit': 1,                   // limits max number of toasts 
     'tap-to-dismiss': true,
     'newest-on-top': true,
-    //'fade-in': 1000,            // done in css
-    //'on-fade-in': undefined,    // not implemented
-    //'fade-out': 1000,           // done in css
-    // 'on-fade-out': undefined,  // not implemented
-    //'extended-time-out': 1000,    // not implemented
-    'time-out': 5000, // Set timeOut and extendedTimeout to 0 to make it sticky
     'icon-classes': {
         error: 'toast-error',
         info: 'toast-info',
@@ -53,6 +47,7 @@ angular.module('toaster', ['ngAnimate'])
     'title-class': 'toast-title',
     'message-class': 'toast-message'
 })
+
 .directive('toasterContainer', ['$compile', '$timeout', '$sce', 'toasterConfig', 'toaster',
 function ($compile, $timeout, $sce, toasterConfig, toaster) {
     return {
@@ -131,18 +126,6 @@ function ($compile, $timeout, $sce, toasterConfig, toaster) {
         },
         controller: ['$scope', '$element', '$attrs', function ($scope, $element, $attrs) {
 
-            $scope.stopTimer = function (toast) {
-                if (toast.timeout) {
-                    $timeout.cancel(toast.timeout);
-                    toast.timeout = null;
-                }
-            };
-
-            $scope.restartTimer = function (toast) {
-                if (!toast.timeout)
-                    $scope.configureTimer(toast);
-            };
-
             $scope.removeToast = function (id) {
                 var i = 0;
                 for (i; i < $scope.toasters.length; i++) {
@@ -160,8 +143,8 @@ function ($compile, $timeout, $sce, toasterConfig, toaster) {
         }],
         template:
         '<div  id="toast-container" ng-class="config.position">' +
-            '<div ng-repeat="toaster in toasters" class="toast" ng-class="toaster.type" ng-click="remove(toaster.id)" ng-mouseover="stopTimer(toaster)"  ng-mouseout="restartTimer(toaster)">' +
-              '<div ng-class="config.title">{{toaster.title}}</div>' +
+            '<div ng-repeat="toaster in toasters" class="toast" ng-class="toaster.type" ng-click="remove(toaster.id)">' +
+              '<div ng-class="config.title" >{{toaster.title}}</div>' +
               '<div ng-class="config.message" ng-switch on="toaster.bodyOutputType">' +
                 '<div ng-switch-when="trustedHtml" ng-bind-html="toaster.html"></div>' +
                 '<div ng-switch-when="template"><div ng-include="toaster.bodyTemplate"></div></div>' +
